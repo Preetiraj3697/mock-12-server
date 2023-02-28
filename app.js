@@ -1,22 +1,19 @@
 
 require("dotenv").config();
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const connect = require("./config/db");
+const post = require("./routes/products");
 const app = express();
-const connectDB = require("./db/connect")
-const products_routes = require("./routes/products")
-app.get("/",(req,res)=>{
-    res.send("Home Page");
-})
-// middleware or to set router
-app.use("/api/products",products_routes);
-const start = async () => {
-    try{
-        await connectDB(process.env.MONGODB_URL); 
-        app.listen(process.env.PORT, ()=>{
-            console.log(`${process.env.PORT} YES I am connected`);
-        })
-    }catch(error){
-        console.log(error)
+app.use(express.json());
+app.use(cors());
+app.use("/", post);
+
+app.listen(process.env.PORT, async () => {
+    try {
+        await connect;
+        console.log(`Listening at http://localhost:${process.env.PORT}`)
+    } catch (error) {
+        console.log(error);
     }
-}
-start();
+})

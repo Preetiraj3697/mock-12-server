@@ -7,7 +7,9 @@ const productSchema = new mongoose.Schema({
   category: { type: String, default: true },
   image:{ type: String, default: true },
   location:{ type: String, default: true },
-  postedAt: { type: Date, default: Date.now() },
+  postedAt: { type: String, default: Date.now() },
 });
 
-module.exports = mongoose.model("Product",productSchema);
+const Product = mongoose.model("Product", productSchema)
+
+module.exports = {Product};

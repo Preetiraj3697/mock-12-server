@@ -1,6 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const {getAllProducts} = require('../controllers/products')
-router.route("/").get(getAllProducts);
+const express= require("express");
+const { browse_classifieds, post_classification, DeletePost } = require("../controller/post.controller");
+const router= express.Router();
 
-module.exports = router;
+router.route("/add/product").post(post_classification)
+router.route("/product").get(browse_classifieds)
+router.route("/add/product/:id").delete(DeletePost);
+
+module.exports=router
